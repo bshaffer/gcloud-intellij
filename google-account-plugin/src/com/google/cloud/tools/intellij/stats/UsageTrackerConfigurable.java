@@ -16,7 +16,6 @@
 
 package com.google.cloud.tools.intellij.stats;
 
-import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 
@@ -27,24 +26,22 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.JComponent;
 
 /**
- * Created by eshaul on 7/29/16.
+ * Implementation of {@code ApplicationConfigurable} extension that provides a Google Cloud Tools
+ * tab in the "Settings" dialog.
  */
-public class GoogleSettingsConfigurable implements SearchableConfigurable.Parent {
+public class UsageTrackerConfigurable implements SearchableConfigurable {
 
-  @Override
-  public boolean hasOwnContent() {
-    return false;
-  }
+  private GoogleSettingsPanel googleSettingsPanel;
+  private UsageTrackerManager usageTrackerManager;
 
-  @Override
-  public boolean isVisible() {
-    return true;
+  public UsageTrackerConfigurable() {
+    usageTrackerManager = UsageTrackerManager.getInstance();
   }
 
   @NotNull
   @Override
   public String getId() {
-    return "settings.google";
+    return "google.settings.tracker";
   }
 
   @Nullable
@@ -56,7 +53,7 @@ public class GoogleSettingsConfigurable implements SearchableConfigurable.Parent
   @Nls
   @Override
   public String getDisplayName() {
-    return "Google";
+    return "Usage Tracking";
   }
 
   @Nullable
@@ -65,34 +62,36 @@ public class GoogleSettingsConfigurable implements SearchableConfigurable.Parent
     return null;
   }
 
-  @Override
-  public Configurable[] getConfigurables() {
-    return new Configurable[0];
-  }
-
   @Nullable
   @Override
   public JComponent createComponent() {
-    return null;
+    if (googleSettingsPanel == null) {
+      googleSettingsPanel = new GoogleSettingsPanel(usageTrackerManager);
+    }
+    return googleSettingsPanel.getComponent();
   }
 
   @Override
   public boolean isModified() {
-    return false;
+    return googleSettingsPanel != null && googleSettingsPanel.isModified();
   }
 
   @Override
   public void apply() throws ConfigurationException {
-
+    if (googleSettingsPanel != null) {
+      googleSettingsPanel.apply();
+    }
   }
 
   @Override
   public void reset() {
-
+    if (googleSettingsPanel != null) {
+      googleSettingsPanel.reset();
+    }
   }
 
   @Override
   public void disposeUIResources() {
-
+    googleSettingsPanel = null;
   }
 }

@@ -91,7 +91,7 @@ public class AppEngineCloudType extends ServerType<AppEngineServerConfiguration>
   @Override
   public RemoteServerConfigurable createServerConfigurable(
       @NotNull AppEngineServerConfiguration configuration) {
-    return new AppEngineCloudConfigurable(configuration, null);
+    return new AppEngineCloudConfigurable();
   }
 
   @NotNull

@@ -70,7 +70,7 @@ public class UsageTrackerNotification {
           } else if ("policy".equals(description)) {
             try {
               BrowserUtil
-                  .browse(new URL(GoogleSettingsConfigurable.PRIVACY_POLICY_URL));
+                  .browse(new URL(GoogleSettingsPanel.PRIVACY_POLICY_URL));
             } catch (MalformedURLException ex) {
               LOG.error(ex);
             }
