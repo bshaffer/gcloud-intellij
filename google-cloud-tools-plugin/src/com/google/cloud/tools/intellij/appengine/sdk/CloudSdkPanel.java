@@ -20,7 +20,6 @@ import com.google.cloud.tools.intellij.appengine.util.CloudSdkUtil;
 import com.google.cloud.tools.intellij.util.GctBundle;
 import com.google.cloud.tools.intellij.util.SystemEnvironmentProvider;
 
-import com.intellij.execution.configurations.RuntimeConfigurationError;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -95,11 +94,8 @@ public class CloudSdkPanel {
   }
 
   public void apply() throws ConfigurationException {
-    if (StringUtil.isEmpty(getCloudSdkDirectory())
-        || !CloudSdkUtil.containsCloudSdkExecutable(getCloudSdkDirectory())) {
-      throw new RuntimeConfigurationError(
-          GctBundle.message("appengine.cloudsdk.location.missing.message"));
-    } else {
+    if (!StringUtil.isEmpty(getCloudSdkDirectory())
+        && CloudSdkUtil.containsCloudSdkExecutable(getCloudSdkDirectory())) {
       CloudSdkService.getInstance().setCloudSdkHomePath(getCloudSdkDirectory());
     }
   }
