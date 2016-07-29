@@ -24,7 +24,7 @@ public class DefaultCloudSdkService extends CloudSdkService {
   private String cloudSdkHomePath;
 
   @Override
-  public String getCloudSdkHomPath() {
+  public String getCloudSdkHomePath() {
     return cloudSdkHomePath;
   }
 

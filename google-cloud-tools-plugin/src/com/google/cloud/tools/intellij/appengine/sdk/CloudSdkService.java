@@ -27,6 +27,6 @@ public abstract class CloudSdkService {
     return ServiceManager.getService(CloudSdkService.class);
   }
 
-  public abstract String getCloudSdkHomPath();
+  public abstract String getCloudSdkHomePath();
   public abstract void setCloudSdkHomePath(String path);
 }

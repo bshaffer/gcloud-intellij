@@ -53,7 +53,7 @@ public class CloudSdkPanel {
         = CloudSdkUtil.findCloudSdkDirectoryPath(environmentProvider);
 
     if (cloudSdkDirectoryPath != null
-        && cloudSdkService.getCloudSdkHomPath() == null) {
+        && cloudSdkService.getCloudSdkHomePath() == null) {
       cloudSdkService.setCloudSdkHomePath(cloudSdkDirectoryPath);
       cloudSdkDirectoryField.setText(cloudSdkDirectoryPath);
     }
@@ -90,7 +90,7 @@ public class CloudSdkPanel {
 
   public boolean isModified() {
     return !Comparing.strEqual(getCloudSdkDirectory(),
-        CloudSdkService.getInstance().getCloudSdkHomPath());
+        CloudSdkService.getInstance().getCloudSdkHomePath());
   }
 
   public void apply() throws ConfigurationException {
@@ -101,7 +101,7 @@ public class CloudSdkPanel {
   }
 
   public void reset() {
-    setCloudSdkDirectoryText(CloudSdkService.getInstance().getCloudSdkHomPath());
+    setCloudSdkDirectoryText(CloudSdkService.getInstance().getCloudSdkHomePath());
   }
 
   public String getCloudSdkDirectory() {

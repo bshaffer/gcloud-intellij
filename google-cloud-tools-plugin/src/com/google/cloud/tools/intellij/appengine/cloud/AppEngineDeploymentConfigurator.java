@@ -16,6 +16,7 @@
 
 package com.google.cloud.tools.intellij.appengine.cloud;
 
+import com.google.cloud.tools.intellij.appengine.sdk.CloudSdkService;
 import com.google.cloud.tools.intellij.appengine.util.AppEngineUtil;
 
 import com.intellij.openapi.diagnostic.Logger;
@@ -76,12 +77,13 @@ class AppEngineDeploymentConfigurator extends
       return null;
     }
 
+    // TODO need to check for missing Cloud SDK here since we no longer are forcing it in the UI
     return new AppEngineDeploymentRunConfigurationEditor(
         project,
         (AppEngineDeployable) source,
         new CloudSdkAppEngineHelper(
             project,
-            new File(server.getConfiguration().getCloudSdkHomePath()))
+            new File(CloudSdkService.getInstance().getCloudSdkHomePath()))
     );
   }
 }

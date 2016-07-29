@@ -16,6 +16,7 @@
 
 package com.google.cloud.tools.intellij.appengine.cloud;
 
+import com.google.cloud.tools.intellij.appengine.sdk.CloudSdkService;
 import com.google.cloud.tools.intellij.login.Services;
 import com.google.cloud.tools.intellij.util.GctBundle;
 
@@ -41,12 +42,9 @@ import java.util.Set;
 class AppEngineRuntimeInstance extends
     ServerRuntimeInstance<AppEngineDeploymentConfiguration> {
 
-  private AppEngineServerConfiguration configuration;
   private final Set<CancellableRunnable> createdDeployments;
 
-  public AppEngineRuntimeInstance(
-      AppEngineServerConfiguration configuration) {
-    this.configuration = configuration;
+  public AppEngineRuntimeInstance() {
     this.createdDeployments = new HashSet<>();
   }
 
@@ -63,7 +61,7 @@ class AppEngineRuntimeInstance extends
       return;
     }
 
-    File gcloudCommandPath = new File(configuration.getCloudSdkHomePath());
+    File gcloudCommandPath = new File(CloudSdkService.getInstance().getCloudSdkHomePath());
     AppEngineHelper appEngineHelper = new CloudSdkAppEngineHelper(
         task.getProject(),
         gcloudCommandPath);
